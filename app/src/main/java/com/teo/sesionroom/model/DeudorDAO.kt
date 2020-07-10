@@ -10,7 +10,7 @@ interface DeudorDAO {
     fun crearDeudor(deudor: Deudor)
 
 
-    @Query("SELECT * FROM tabla_deudor WHERE nombre LIKE :nombre")
+    @Query("SELECT * FROM tabla_deudor WHERE email LIKE :nombre")
     fun buscarDeudor(nombre: String): Deudor
 
 
