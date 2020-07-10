@@ -7,7 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.DatePicker
 import android.widget.Toast
+import com.teo.sesionroom.model2.newUser
+import com.teo.sesionroom.model2.newUserDAO
 import kotlinx.android.synthetic.main.activity_registro.*
+import java.sql.Types
 import java.util.*
 
 class RegistroActivity : AppCompatActivity() {
@@ -65,13 +68,22 @@ class RegistroActivity : AppCompatActivity() {
                 if (contra.length > 5) {
                     if (contra != rcontra)
                         Toast.makeText(this, "Contraseñas no coinciden", Toast.LENGTH_SHORT).show()
-                    else {
+                    val usuario = newUser(Types.NULL, nombre, correo, contra)
+
+                    val userDAO : newUserDAO = SesionROOM.dataBase2.newUserDAO()
+
+                    userDAO.crearUsuario(usuario)
+
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    /*else {
                         var intent = Intent()
                         intent.putExtra("correo", correo)
                         intent.putExtra("contra", contra)
                         setResult(Activity.RESULT_OK, intent)
                         finish()
-                    }
+                    }*/
                 } else
                     Toast.makeText(
                         this,

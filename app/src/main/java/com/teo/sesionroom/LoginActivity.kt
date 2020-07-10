@@ -5,13 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.teo.sesionroom.model2.Deudor2DAO
+import com.teo.sesionroom.model2.newUserDAO
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
-    var correo: String? = ""
-    var contra: String? = ""
+   // var correo: String? = ""
+    //var contra: String? = ""
+    var email = ""
+    var pass =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,19 +39,32 @@ class LoginActivity : AppCompatActivity() {
 
         bt_iniciarsesion.setOnClickListener{
 
-            val correo = et_Correo.text.toString()
-            val contra = et_Contra.text.toString()
+            var correo = et_Correo.text.toString()
+            var contra = et_Contra.text.toString()
 
-            //val deudor2DAO: Deudor2DAO = SesionROOM.database2.Deudor2DAO()
-           // val email = deudor2DAO.buscarDeudor2(correo)
+            val newuserDAO: newUserDAO = SesionROOM.dataBase2.newUserDAO()
+            val usuario = newuserDAO.buscarCorreo(correo)
 
             if (correo!!.isEmpty()||contra!!.isEmpty())
                 Toast.makeText(this,"Sus datos no coinciden",Toast.LENGTH_SHORT).show()
 
             else{
-                if(et_Correo.text.toString()==correo && et_Contra.text.toString()==contra){
-                    Toast.makeText(this,"Valido ",Toast.LENGTH_SHORT).show()
-                    goToMainActivity()
+                if(usuario != null){
+                    /*Esto iba en la condicion del id et_Correo.text.toString()==correo && et_Contra.text.toString()==contra*/
+                    //Toast.makeText(this,"Valido ",Toast.LENGTH_SHORT).show()
+                    //goToMainActivity()
+                    email = usuario.email
+                    pass = usuario.contra
+                    if (pass == contra){
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                    else{
+                        Toast.makeText(this, "Sus datos no coinciden", Toast.LENGTH_LONG).show()
+                    }
+
 
                 }
 
@@ -65,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+   /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
 
@@ -82,10 +97,10 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-    }
+    }*/
 
 
-    private fun goToMainActivity(){
+    /*private fun goToMainActivity(){
         var intent =Intent(this,MainActivity::class.java)
         intent.putExtra("correo",correo)
         intent.putExtra("contra",contra)
@@ -93,7 +108,7 @@ class LoginActivity : AppCompatActivity() {
 
         startActivity(intent)
         finish()
-    }
+    }*/
 
 
 
