@@ -27,4 +27,9 @@
         android:name="com.teo.sesionroom.ui.delete.DeleteFragment"
         android:label="@string/title_delete"
         tools:layout="@layout/fragment_delete" />
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.teo.sesionroom.ui.list.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" />
 </navigation>

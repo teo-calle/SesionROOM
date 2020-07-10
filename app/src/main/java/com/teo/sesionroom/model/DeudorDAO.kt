@@ -20,4 +20,7 @@ interface DeudorDAO {
     @Delete
     fun borrarDeudor(deudor: Deudor)
 
+    @Query("SELECT * FROM tabla_deudor")
+    fun getDeudores(): List<Deudor>
+
 }
