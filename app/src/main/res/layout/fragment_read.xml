@@ -22,6 +22,7 @@
         android:id="@+id/bt_buscar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/form_bt_circle"
         android:text="@string/buscar" />
 
     <TextView

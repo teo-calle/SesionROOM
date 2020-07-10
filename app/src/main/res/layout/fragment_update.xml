@@ -22,9 +22,9 @@
         android:id="@+id/bt_buscar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@drawable/form_bt_circle"
         android:text="@string/buscar"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
         android:id="@+id/bt_actualizar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@drawable/form_bt_circle"
         android:text="@string/actualizar"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 </LinearLayout>

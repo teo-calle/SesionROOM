@@ -21,7 +21,7 @@
         android:id="@+id/bt_borrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@drawable/form_bt_circle"
         android:text="@string/borrar"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 </LinearLayout>
