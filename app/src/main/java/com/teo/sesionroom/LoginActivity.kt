@@ -5,20 +5,50 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.firebase.auth.FirebaseAuth
 import com.teo.sesionroom.model2.newUserDAO
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
 
-   // var correo: String? = ""
-    //var contra: String? = ""
-    var email = ""
-    var pass =""
+    var correo: String? = ""
+    var contra: String? = ""
+    lateinit var providers : List<AuthUI.IdpConfig>
+    var googleSignInClient : GoogleSignInClient? = null
+
+    val RC_SIGN_IN = 1000
+    var mGoogleApiClient: GoogleApiClient? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this,gso)
+
+
+        providers = Arrays.asList<AuthUI.IdpConfig>(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build()
+
+        )
+
+        showSignInOptions()
+
+        // ...
+        bt_google.setOnClickListener {
+
+            var signInIntent = googleSignInClient?.signInIntent
+            startActivityForResult(signInIntent,RC_SIGN_IN)
+        }
+        //val mAuth : FirebaseAuth = FirebaseAuth.getInstance()
 
      /*   var datosRecibidos : Bundle? =intent.extras
         if(datosRecibidos != null) {
@@ -35,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
         bt_iniciarsesion.setOnClickListener{
@@ -80,6 +111,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
+  //////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////
    /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

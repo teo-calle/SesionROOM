@@ -68,6 +68,17 @@
             android:textSize="16sp" />
 
         <Button
+            android:id="@+id/bt_google"
+            android:layout_width="108dp"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bt_login_activity"
+            android:drawableStart="@drawable/googleg_standard_color_18"
+            android:text="@string/common_signin_button_text_long" />
+
+
+        <Button
 
             android:id="@+id/tv_registrar"
             android:layout_width="wrap_content"
